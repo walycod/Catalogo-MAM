@@ -41,7 +41,6 @@
             font-size: 16px;
         }
 
-
         /* =========================
            PESTAÑAS
         ========================= */
@@ -58,13 +57,10 @@
             border: none;
             padding: 13px 25px;
             border-radius: 30px;
-
             background: white;
             color: #333;
-
             font-size: 16px;
             font-weight: bold;
-
             cursor: pointer;
 
             box-shadow:
@@ -82,7 +78,6 @@
             color: white;
         }
 
-
         /* =========================
            BOTÓN OFERTAS
         ========================= */
@@ -96,7 +91,6 @@
                 );
 
             color: #8b0000;
-
             border: 2px solid white;
 
             animation: pulsar 1.5s infinite;
@@ -112,7 +106,6 @@
 
             color: white;
         }
-
 
         @keyframes pulsar {
 
@@ -142,7 +135,6 @@
 
         }
 
-
         /* =========================
            BUSCADOR
         ========================= */
@@ -155,21 +147,18 @@
 
         .buscador input {
             width: 100%;
-
             padding: 14px 18px;
 
             border: 1px solid #ddd;
             border-radius: 30px;
 
             font-size: 16px;
-
             outline: none;
         }
 
         .buscador input:focus {
             border-color: #d71920;
         }
-
 
         /* =========================
            TITULO OFERTAS
@@ -179,9 +168,7 @@
             display: none;
 
             max-width: 1200px;
-
             margin: 5px auto 20px;
-
             padding: 0 15px;
 
             text-align: center;
@@ -191,7 +178,6 @@
             display: inline-block;
 
             padding: 14px 25px;
-
             border-radius: 15px;
 
             color: white;
@@ -209,7 +195,6 @@
 
             animation: brillo 2s infinite;
         }
-
 
         @keyframes brillo {
 
@@ -233,7 +218,6 @@
 
         }
 
-
         /* =========================
            GALERÍA
         ========================= */
@@ -255,7 +239,6 @@
 
             gap: 20px;
         }
-
 
         /* =========================
            PRODUCTO
@@ -290,7 +273,6 @@
                 rgba(0, 0, 0, 0.18);
         }
 
-
         .producto img {
             width: 100%;
 
@@ -304,7 +286,6 @@
 
             background: white;
         }
-
 
         /* =========================
            ETIQUETA OFERTA
@@ -343,7 +324,6 @@
                 oferta 1.3s infinite;
         }
 
-
         @keyframes oferta {
 
             0% {
@@ -366,17 +346,14 @@
 
         }
 
-
         /* =========================
            INFORMACIÓN OFERTA
         ========================= */
 
         .info-producto {
             padding: 15px;
-
             text-align: center;
         }
-
 
         .nombre-producto {
             font-size: 20px;
@@ -388,7 +365,6 @@
             margin-bottom: 13px;
         }
 
-
         .promociones {
             display: flex;
 
@@ -396,7 +372,6 @@
 
             gap: 8px;
         }
-
 
         .promocion {
             background:
@@ -424,11 +399,9 @@
                 rgba(255, 120, 0, 0.15);
         }
 
-
         .promocion strong {
             color: #111;
         }
-
 
         .llamada-oferta {
             margin-top: 12px;
@@ -439,7 +412,6 @@
 
             font-weight: bold;
         }
-
 
         /* =========================
            VISOR GRANDE
@@ -465,7 +437,6 @@
             justify-content: center;
         }
 
-
         .visor img {
             max-width: 90%;
             max-height: 90%;
@@ -478,7 +449,6 @@
                 0 0 30px
                 rgba(0, 0, 0, 0.5);
         }
-
 
         /* =========================
            CERRAR
@@ -504,7 +474,6 @@
         .cerrar:hover {
             color: #ff4444;
         }
-
 
         /* =========================
            ANTERIOR / SIGUIENTE
@@ -539,13 +508,11 @@
                 background 0.2s;
         }
 
-
         .anterior:hover,
         .siguiente:hover {
             background:
                 rgba(255, 255, 255, 0.4);
         }
-
 
         .anterior {
             left: 20px;
@@ -554,7 +521,6 @@
         .siguiente {
             right: 20px;
         }
-
 
         /* =========================
            NUMERO
@@ -582,7 +548,6 @@
             font-size: 15px;
         }
 
-
         /* =========================
            SIN RESULTADOS
         ========================= */
@@ -599,7 +564,6 @@
             font-size: 18px;
         }
 
-
         /* =========================
            RESPONSIVE
         ========================= */
@@ -612,7 +576,6 @@
             }
 
         }
-
 
         @media (max-width: 650px) {
 
@@ -661,7 +624,6 @@
 
         }
 
-
         @media (max-width: 400px) {
 
             .producto img {
@@ -682,9 +644,7 @@
     </style>
 </head>
 
-
 <body>
-
 
     <!-- =========================
          ENCABEZADO
@@ -718,7 +678,6 @@
 
         </button>
 
-
         <button
             class="pestana ofertas"
             id="btnOfertas"
@@ -735,6 +694,15 @@
          BUSCADOR
     ========================= -->
 
+    <div class="buscador">
+
+        <input
+            type="text"
+            id="buscar"
+            placeholder="Buscar producto por número..."
+            oninput="buscar()">
+
+    </div>
 
 
     <!-- =========================
@@ -770,7 +738,6 @@
         class="visor"
         id="visor">
 
-
         <span
             class="cerrar"
             onclick="cerrarVisor()"
@@ -779,7 +746,6 @@
             &times;
 
         </span>
-
 
         <button
             class="anterior"
@@ -790,12 +756,10 @@
 
         </button>
 
-
         <img
             id="imagenGrande"
             src=""
             alt="Producto">
-
 
         <button
             class="siguiente"
@@ -805,7 +769,6 @@
             &#10095;
 
         </button>
-
 
         <div
             class="numero"
@@ -829,27 +792,6 @@
 
         /* =========================
            OFERTAS
-        =========================
-        
-        Para agregar otra oferta,
-        simplemente agregala dentro
-        de este mismo objeto.
-
-        El número corresponde al
-        nombre de la imagen.
-
-        Ejemplo:
-
-        10: {
-            nombre: "Producto",
-            promociones: [
-                {
-                    cantidad: 5,
-                    descuento: "10% OFF"
-                }
-            ]
-        }
-
         ========================= */
 
         const OFERTAS = {
@@ -858,10 +800,10 @@
                OFERTA IMAGEN 45
             ===================== */
 
-            : {
+            45: {
 
                 nombre:
-                    "?? Masitas Diversión",
+                    "Masitas Diversión",
 
                 promociones: [
 
@@ -889,7 +831,7 @@
                OFERTA IMAGEN 37
             ===================== */
 
-            : {
+            37: {
 
                 nombre:
                     "ALF -- BAGLEY -- ARCOR -- AGUILA",
@@ -911,7 +853,7 @@
                OFERTA IMAGEN 29
             ===================== */
 
-            : {
+            29: {
 
                 nombre:
                     "ALF -- Rasta Triple",
@@ -930,6 +872,7 @@
 
         };
 
+
         /* =========================
            ELEMENTOS
         ========================= */
@@ -939,42 +882,35 @@
                 "galeria"
             );
 
-
         const visor =
             document.getElementById(
                 "visor"
             );
-
 
         const imagenGrande =
             document.getElementById(
                 "imagenGrande"
             );
 
-
         const numeroImagen =
             document.getElementById(
                 "numeroImagen"
             );
-
 
         const buscador =
             document.getElementById(
                 "buscar"
             );
 
-
         const tituloOfertas =
             document.getElementById(
                 "tituloOfertas"
             );
 
-
         const btnTodos =
             document.getElementById(
                 "btnTodos"
             );
-
 
         const btnOfertas =
             document.getElementById(
@@ -999,7 +935,6 @@
 
             galeria.innerHTML = "";
 
-
             for (
                 let i = 1;
                 i <= TOTAL_IMAGENES;
@@ -1011,18 +946,14 @@
                         "div"
                     );
 
-
                 producto.className =
                     "producto";
-
 
                 producto.dataset.numero =
                     i;
 
-
                 const oferta =
                     OFERTAS[i];
-
 
                 let contenido = `
 
@@ -1043,7 +974,6 @@
 
                     let promocionesHTML =
                         "";
-
 
                     oferta.promociones.forEach(
                         promocion => {
@@ -1086,7 +1016,6 @@
                         <div
                             class="info-producto">
 
-
                             <div
                                 class="nombre-producto">
 
@@ -1109,7 +1038,6 @@
                                 💥 ¡Aprovechá esta promoción!
 
                             </div>
-
 
                         </div>
 
@@ -1143,7 +1071,6 @@
                         "img"
                     );
 
-
                 imagen.onerror =
                     function() {
 
@@ -1170,23 +1097,18 @@
 
             modoOfertas = false;
 
-
             buscador.value = "";
-
 
             tituloOfertas.style.display =
                 "none";
-
 
             btnTodos.classList.add(
                 "activa"
             );
 
-
             btnOfertas.classList.remove(
                 "activa"
             );
-
 
             mostrarImagenes();
 
@@ -1201,39 +1123,31 @@
 
             modoOfertas = true;
 
-
             buscador.value = "";
-
 
             tituloOfertas.style.display =
                 "block";
-
 
             btnTodos.classList.remove(
                 "activa"
             );
 
-
             btnOfertas.classList.add(
                 "activa"
             );
 
-
             mostrarImagenes();
-
 
             const productos =
                 document.querySelectorAll(
                     ".producto"
                 );
 
-
             productos.forEach(
                 producto => {
 
                     const numero =
                         producto.dataset.numero;
-
 
                     if (
                         !OFERTAS[numero]
@@ -1261,12 +1175,10 @@
                     .toLowerCase()
                     .trim();
 
-
             const productos =
                 document.querySelectorAll(
                     ".producto"
                 );
-
 
             let encontrados = 0;
 
@@ -1327,6 +1239,7 @@
 
 
             if (
+                texto !== "" &&
                 encontrados === 0
             ) {
 
@@ -1337,18 +1250,14 @@
                             "div"
                         );
 
-
                     mensaje.id =
                         "sinResultados";
-
 
                     mensaje.className =
                         "sin-resultados";
 
-
                     mensaje.textContent =
                         "No se encontró ningún producto.";
-
 
                     galeria.appendChild(
                         mensaje
@@ -1378,13 +1287,10 @@
             imagenActual =
                 numero;
 
-
             actualizarVisor();
-
 
             visor.style.display =
                 "flex";
-
 
             document.body.style.overflow =
                 "hidden";
@@ -1402,11 +1308,9 @@
                 imagenActual +
                 ".png";
 
-
             imagenGrande.alt =
                 "Producto " +
                 imagenActual;
-
 
             numeroImagen.textContent =
                 imagenActual +
@@ -1425,7 +1329,6 @@
             visor.style.display =
                 "none";
 
-
             document.body.style.overflow =
                 "auto";
 
@@ -1440,7 +1343,6 @@
 
             imagenActual--;
 
-
             if (
                 imagenActual < 1
             ) {
@@ -1449,7 +1351,6 @@
                     TOTAL_IMAGENES;
 
             }
-
 
             actualizarVisor();
 
@@ -1464,7 +1365,6 @@
 
             imagenActual++;
 
-
             if (
                 imagenActual >
                 TOTAL_IMAGENES
@@ -1474,7 +1374,6 @@
                     1;
 
             }
-
 
             actualizarVisor();
 
