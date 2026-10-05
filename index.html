@@ -5,9 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Catálogo de productos</title>
+    <title>🎃 MAM Distribuciones | Especial Halloween</title>
 
     <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
 
         * {
             box-sizing: border-box;
@@ -15,154 +19,517 @@
             padding: 0;
         }
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f3f3f3;
-            color: #222;
+        html {
+            scroll-behavior: smooth;
         }
 
-        /* =========================
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(
+                    circle at top,
+                    #241033 0%,
+                    #10091a 45%,
+                    #070707 100%
+                );
+
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+
+        /* =====================================================
+           TELARAÑAS DECORATIVAS
+        ===================================================== */
+
+        body::before {
+            content: "🕸️";
+            position: fixed;
+            top: 5px;
+            left: 8px;
+            font-size: 90px;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+            transform: rotate(-15deg);
+        }
+
+        body::after {
+            content: "🕸️";
+            position: fixed;
+            top: 0;
+            right: 5px;
+            font-size: 90px;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+            transform: rotate(15deg);
+        }
+
+
+        /* =====================================================
            ENCABEZADO
-        ========================= */
+        ===================================================== */
 
         header {
-            background: #d71920;
-            color: white;
+            position: relative;
+            overflow: hidden;
+
             text-align: center;
-            padding: 25px 15px;
+
+            padding:
+                35px 20px
+                32px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #080808,
+                    #160b22,
+                    #2b0b3d
+                );
+
+            border-bottom:
+                3px solid #ff7200;
+
+            box-shadow:
+                0 5px 30px
+                rgba(255, 85, 0, 0.25);
+
+            z-index: 1;
         }
+
+
+        /* Luna */
+
+        header::before {
+            content: "🌕";
+
+            position: absolute;
+
+            top: -20px;
+            right: 7%;
+
+            font-size: 90px;
+
+            opacity: 0.12;
+        }
+
+
+        /* Murciélago */
+
+        header::after {
+            content: "🦇";
+
+            position: absolute;
+
+            top: 15px;
+            left: 7%;
+
+            font-size: 55px;
+
+            opacity: 0.25;
+
+            animation:
+                volar 4s ease-in-out infinite;
+        }
+
+
+        @keyframes volar {
+
+            0% {
+                transform:
+                    translateX(0)
+                    rotate(-5deg);
+            }
+
+            50% {
+                transform:
+                    translateX(25px)
+                    rotate(5deg);
+            }
+
+            100% {
+                transform:
+                    translateX(0)
+                    rotate(-5deg);
+            }
+
+        }
+
+
+        /* =====================================================
+           MARCA
+        ===================================================== */
+
+        .marca {
+            position: relative;
+            z-index: 2;
+
+            display: inline-block;
+
+            font-size: 20px;
+
+            font-weight: 900;
+
+            letter-spacing: 5px;
+
+            color: #ff8a00;
+
+            margin-bottom: 10px;
+
+            text-shadow:
+                0 0 10px
+                rgba(255, 115, 0, 0.6);
+        }
+
 
         header h1 {
-            font-size: 32px;
-            margin-bottom: 8px;
+
+            position: relative;
+            z-index: 2;
+
+            font-size:
+                clamp(34px, 7vw, 64px);
+
+            font-weight: 1000;
+
+            letter-spacing: 3px;
+
+            color: #ffffff;
+
+            text-shadow:
+                0 4px 0 #5c167d,
+                0 0 15px #ff7200,
+                0 0 35px
+                rgba(255, 102, 0, 0.5);
+
+            margin-bottom: 12px;
         }
+
+
+        header h1 span {
+            color: #ff7600;
+        }
+
 
         header p {
-            font-size: 16px;
+
+            position: relative;
+            z-index: 2;
+
+            font-size:
+                clamp(14px, 2vw, 18px);
+
+            color: #ddd;
+
+            letter-spacing: 1px;
         }
 
-        /* =========================
+
+        .frase {
+
+            position: relative;
+            z-index: 2;
+
+            margin-top: 14px;
+
+            font-size: 14px;
+
+            color: #ff9c3a;
+
+            font-weight: bold;
+        }
+
+
+        /* =====================================================
+           DECORACIÓN SUPERIOR
+        ===================================================== */
+
+        .decoracion {
+
+            display: flex;
+
+            justify-content:
+                center;
+
+            align-items:
+                center;
+
+            gap: 25px;
+
+            margin-top: 15px;
+
+            font-size: 24px;
+        }
+
+
+        .decoracion span {
+
+            animation:
+                flotar 2.5s ease-in-out infinite;
+        }
+
+
+        .decoracion span:nth-child(2) {
+            animation-delay: .4s;
+        }
+
+        .decoracion span:nth-child(3) {
+            animation-delay: .8s;
+        }
+
+
+        @keyframes flotar {
+
+            0%,
+            100% {
+                transform:
+                    translateY(0);
+            }
+
+            50% {
+                transform:
+                    translateY(-7px);
+            }
+
+        }
+
+
+        /* =====================================================
            PESTAÑAS
-        ========================= */
+        ===================================================== */
 
         .pestanas {
+
+            position: relative;
+            z-index: 2;
+
             display: flex;
+
             justify-content: center;
-            gap: 12px;
-            padding: 20px 15px 10px;
-            flex-wrap: wrap;
+
+            padding:
+                22px 15px 12px;
         }
 
+
         .pestana {
-            border: none;
-            padding: 13px 25px;
-            border-radius: 30px;
-            background: white;
-            color: #333;
+
+            border:
+                2px solid #ff7200;
+
+            padding:
+                13px 30px;
+
+            border-radius:
+                30px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff7200,
+                    #ff3d00
+                );
+
+            color: #fff;
+
             font-size: 16px;
-            font-weight: bold;
+
+            font-weight: 900;
+
             cursor: pointer;
 
             box-shadow:
-                0 3px 10px rgba(0, 0, 0, 0.12);
+                0 5px 20px
+                rgba(255, 94, 0, 0.3);
 
-            transition: 0.25s;
+            transition:
+                .25s ease;
         }
+
 
         .pestana:hover {
-            transform: translateY(-2px);
-        }
 
-        .pestana.activa {
-            background: #d71920;
-            color: white;
-        }
+            transform:
+                translateY(-3px)
+                scale(1.03);
 
-
-
-        /* =========================
-           BUSCADOR
-        ========================= */
-
-        .buscador {
-            max-width: 500px;
-            margin: 15px auto 25px;
-            padding: 0 15px;
-        }
-
-        .buscador input {
-            width: 100%;
-            padding: 14px 18px;
-
-            border: 1px solid #ddd;
-            border-radius: 30px;
-
-            font-size: 16px;
-            outline: none;
-        }
-
-        .buscador input:focus {
-            border-color: #d71920;
+            box-shadow:
+                0 8px 25px
+                rgba(255, 94, 0, 0.5);
         }
 
 
+        /* =====================================================
+           SEPARADOR
+        ===================================================== */
 
-        /* =========================
+        .separador {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin:
+                8px auto 25px;
+
+            max-width: 700px;
+
+            color: #ff7200;
+
+            font-size: 14px;
+
+            font-weight: bold;
+        }
+
+
+        .separador::before,
+        .separador::after {
+
+            content: "";
+
+            height: 1px;
+
+            flex: 1;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    #ff7200
+                );
+        }
+
+
+        .separador::after {
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ff7200,
+                    transparent
+                );
+        }
+
+
+        /* =====================================================
            GALERÍA
-        ========================= */
+        ===================================================== */
 
         .galeria {
-            max-width: 1200px;
 
-            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+
+            max-width: 1250px;
+
+            margin:
+                0 auto;
 
             padding:
-                10px
-                15px
-                50px;
+                10px 20px 60px;
 
             display: grid;
 
             grid-template-columns:
                 repeat(4, 1fr);
 
-            gap: 20px;
+            gap: 22px;
         }
 
-        /* =========================
+
+        /* =====================================================
            PRODUCTO
-        ========================= */
+        ===================================================== */
 
         .producto {
+
             position: relative;
 
-            background: white;
+            background:
+                linear-gradient(
+                    145deg,
+                    #ffffff,
+                    #f1edf4
+                );
 
-            border-radius: 12px;
+            border-radius:
+                18px;
 
             overflow: hidden;
 
             cursor: pointer;
 
+            border:
+                2px solid
+                rgba(255, 115, 0, 0.15);
+
             box-shadow:
-                0 3px 10px
-                rgba(0, 0, 0, 0.10);
+                0 5px 20px
+                rgba(0, 0, 0, 0.45);
 
             transition:
-                transform 0.25s,
-                box-shadow 0.25s;
+                transform .3s ease,
+                box-shadow .3s ease,
+                border-color .3s ease;
         }
+
+
+        .producto::before {
+
+            content: "🎃";
+
+            position: absolute;
+
+            top: 8px;
+            right: 8px;
+
+            font-size: 20px;
+
+            opacity: 0;
+
+            transform:
+                scale(.5);
+
+            transition:
+                .25s ease;
+
+            z-index: 3;
+        }
+
 
         .producto:hover {
+
             transform:
-                translateY(-5px);
+                translateY(-8px)
+                scale(1.015);
+
+            border-color:
+                #ff7200;
 
             box-shadow:
-                0 8px 20px
-                rgba(0, 0, 0, 0.18);
+                0 12px 30px
+                rgba(255, 88, 0, 0.35);
         }
 
+
+        .producto:hover::before {
+
+            opacity: 1;
+
+            transform:
+                scale(1);
+        }
+
+
         .producto img {
+
             width: 100%;
 
             height: 230px;
@@ -171,81 +538,139 @@
 
             object-fit: contain;
 
-            padding: 10px;
+            padding: 14px;
 
-            background: white;
+            background:
+                #ffffff;
+
+            transition:
+                transform .3s ease;
         }
 
 
+        .producto:hover img {
 
-        /* =========================
-           VISOR GRANDE
-        ========================= */
+            transform:
+                scale(1.04);
+        }
+
+
+        /* =====================================================
+           PIE DE PRODUCTO
+        ===================================================== */
+
+        .producto-info {
+
+            padding:
+                8px 12px 12px;
+
+            text-align: center;
+
+            color: #333;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+
+        /* =====================================================
+           VISOR
+        ===================================================== */
 
         .visor {
+
             display: none;
 
             position: fixed;
 
             z-index: 9999;
 
-            left: 0;
-            top: 0;
+            inset: 0;
 
             width: 100%;
             height: 100%;
 
             background:
-                rgba(0, 0, 0, 0.92);
+                rgba(0, 0, 0, 0.96);
 
-            align-items: center;
-            justify-content: center;
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            backdrop-filter:
+                blur(8px);
         }
 
+
         .visor img {
-            max-width: 90%;
-            max-height: 90%;
+
+            max-width: 88%;
+
+            max-height: 82%;
 
             object-fit: contain;
 
-            border-radius: 8px;
+            border-radius:
+                12px;
+
+            background: white;
+
+            padding: 8px;
 
             box-shadow:
-                0 0 30px
-                rgba(0, 0, 0, 0.5);
+                0 0 40px
+                rgba(255, 102, 0, 0.35);
         }
 
-        /* =========================
+
+        /* =====================================================
            CERRAR
-        ========================= */
+        ===================================================== */
 
         .cerrar {
+
             position: absolute;
 
-            top: 20px;
-            right: 30px;
+            top: 18px;
+            right: 28px;
 
             color: white;
 
-            font-size: 45px;
+            font-size: 50px;
+
+            line-height: 1;
 
             font-weight: bold;
 
             cursor: pointer;
 
             z-index: 10001;
+
+            transition:
+                .2s ease;
         }
+
 
         .cerrar:hover {
-            color: #ff4444;
+
+            color:
+                #ff7200;
+
+            transform:
+                rotate(90deg);
         }
 
-        /* =========================
+
+        /* =====================================================
            ANTERIOR / SIGUIENTE
-        ========================= */
+        ===================================================== */
 
         .anterior,
         .siguiente {
+
             position: absolute;
 
             top: 50%;
@@ -253,48 +678,64 @@
             transform:
                 translateY(-50%);
 
-            border: none;
+            border:
+                1px solid
+                rgba(255,255,255,.25);
 
             background:
-                rgba(255, 255, 255, 0.2);
+                rgba(255, 112, 0, .85);
 
             color: white;
 
-            width: 55px;
-            height: 70px;
+            width: 58px;
 
-            font-size: 35px;
+            height: 72px;
+
+            font-size: 34px;
 
             cursor: pointer;
 
-            border-radius: 8px;
+            border-radius:
+                14px;
 
             transition:
-                background 0.2s;
+                .2s ease;
+
+            z-index: 10001;
         }
+
 
         .anterior:hover,
         .siguiente:hover {
+
             background:
-                rgba(255, 255, 255, 0.4);
+                #ff8a00;
+
+            transform:
+                translateY(-50%)
+                scale(1.08);
         }
+
 
         .anterior {
             left: 20px;
         }
 
+
         .siguiente {
             right: 20px;
         }
 
-        /* =========================
+
+        /* =====================================================
            NUMERO
-        ========================= */
+        ===================================================== */
 
         .numero {
+
             position: absolute;
 
-            bottom: 20px;
+            bottom: 22px;
 
             left: 50%;
 
@@ -304,133 +745,363 @@
             color: white;
 
             background:
-                rgba(0, 0, 0, 0.5);
+                rgba(0, 0, 0, .65);
 
-            padding: 8px 15px;
+            border:
+                1px solid
+                rgba(255, 115, 0, .6);
 
-            border-radius: 20px;
+            padding:
+                9px 18px;
 
-            font-size: 15px;
+            border-radius:
+                25px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            z-index: 10001;
         }
 
-        /* =========================
-           SIN RESULTADOS
-        ========================= */
 
-        .sin-resultados {
-            grid-column: 1 / -1;
+        /* =====================================================
+           WHATSAPP
+        ===================================================== */
+
+        .whatsapp {
+
+            position: fixed;
+
+            right: 20px;
+
+            bottom: 20px;
+
+            width: 58px;
+
+            height: 58px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background:
+                #25D366;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 28px;
+
+            box-shadow:
+                0 5px 20px
+                rgba(0,0,0,.4);
+
+            z-index: 5000;
+
+            transition:
+                .25s ease;
+        }
+
+
+        .whatsapp:hover {
+
+            transform:
+                scale(1.12);
+
+            box-shadow:
+                0 8px 30px
+                rgba(37,211,102,.45);
+        }
+
+
+        /* =====================================================
+           PIE DE PÁGINA
+        ===================================================== */
+
+        footer {
+
+            position: relative;
+
+            z-index: 2;
 
             text-align: center;
 
-            padding: 50px;
+            padding:
+                25px 15px 35px;
 
-            color: #777;
+            border-top:
+                1px solid
+                rgba(255,115,0,.2);
 
-            font-size: 18px;
+            background:
+                rgba(0,0,0,.35);
+
+            color: #aaa;
+
+            font-size: 13px;
         }
 
-        /* =========================
-           RESPONSIVE
-        ========================= */
 
-        @media (max-width: 900px) {
+        footer strong {
+
+            color:
+                #ff7200;
+        }
+
+
+        footer .calabaza {
+
+            display: block;
+
+            font-size: 28px;
+
+            margin-bottom: 8px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE TABLET
+        ===================================================== */
+
+        @media (max-width: 1000px) {
 
             .galeria {
+
                 grid-template-columns:
                     repeat(3, 1fr);
+
+                gap: 16px;
             }
 
         }
+
+
+        /* =====================================================
+           RESPONSIVE CELULAR
+        ===================================================== */
 
         @media (max-width: 650px) {
 
-            header h1 {
-                font-size: 26px;
+            header {
+
+                padding:
+                    28px 15px 25px;
             }
 
+
+            header h1 {
+
+                font-size: 31px;
+
+                letter-spacing: 1px;
+            }
+
+
+            .marca {
+
+                font-size: 16px;
+
+                letter-spacing: 3px;
+            }
+
+
+            header::after {
+
+                left: 3%;
+
+                font-size: 38px;
+            }
+
+
+            header::before {
+
+                right: 2%;
+
+                font-size: 60px;
+            }
+
+
             .pestana {
-                padding: 11px 17px;
+
+                padding:
+                    11px 22px;
+
                 font-size: 14px;
             }
 
+
             .galeria {
+
                 grid-template-columns:
                     repeat(2, 1fr);
 
                 gap: 12px;
+
+                padding:
+                    8px 12px 50px;
             }
+
+
+            .producto {
+
+                border-radius:
+                    13px;
+            }
+
 
             .producto img {
-                height: 180px;
+
+                height: 175px;
+
+                padding: 8px;
             }
 
-            .nombre-producto {
-                font-size: 17px;
+
+            .producto-info {
+
+                font-size: 10px;
             }
 
-            .promocion {
-                font-size: 13px;
-            }
 
             .anterior,
             .siguiente {
-                width: 45px;
-                height: 60px;
-                font-size: 28px;
+
+                width: 44px;
+
+                height: 58px;
+
+                font-size: 27px;
             }
+
 
             .anterior {
-                left: 8px;
+                left: 7px;
             }
 
+
             .siguiente {
-                right: 8px;
+                right: 7px;
+            }
+
+
+            .cerrar {
+
+                top: 12px;
+
+                right: 17px;
+
+                font-size: 42px;
+            }
+
+
+            .visor img {
+
+                max-width: 84%;
+
+                max-height: 76%;
+            }
+
+
+            .whatsapp {
+
+                width: 52px;
+
+                height: 52px;
+
+                right: 14px;
+
+                bottom: 14px;
+
+                font-size: 25px;
             }
 
         }
 
+
+        /* =====================================================
+           CELULARES PEQUEÑOS
+        ===================================================== */
+
         @media (max-width: 400px) {
 
+            .galeria {
+
+                gap: 9px;
+
+                padding:
+                    5px 8px 45px;
+            }
+
+
             .producto img {
-                height: 150px;
+
+                height: 145px;
             }
 
-            .pestanas {
-                gap: 7px;
+
+            .decoracion {
+
+                gap: 15px;
+
+                font-size: 20px;
             }
 
-            .pestana {
-                padding: 10px 12px;
-                font-size: 13px;
+
+            .frase {
+
+                font-size: 12px;
             }
 
         }
 
     </style>
+
 </head>
+
 
 <body>
 
-    <!-- =========================
+
+    <!-- =====================================================
          ENCABEZADO
-    ========================= -->
+    ===================================================== -->
 
     <header>
 
+        <div class="marca">
+            MAM DISTRIBUCIONES
+        </div>
+
         <h1>
-            CATÁLOGO
+            🎃 CATÁLOGO <span>HALLOWEEN</span> 👻
         </h1>
 
         <p>
-            Todos nuestros productos
+            Todos nuestros productos en un solo lugar
         </p>
+
+        <div class="frase">
+            🕷️ Especial Halloween · Prepará tu pedido 🕷️
+        </div>
+
+        <div class="decoracion">
+            <span>🦇</span>
+            <span>🎃</span>
+            <span>👻</span>
+        </div>
 
     </header>
 
 
-    <!-- =========================
-         PESTAÑAS
-    ========================= -->
+    <!-- =====================================================
+         PESTAÑA
+    ===================================================== -->
 
     <div class="pestanas">
 
@@ -439,33 +1110,40 @@
             id="btnTodos"
             onclick="mostrarTodos()">
 
-            🛍️ TODOS
+            🛍️ VER TODOS LOS PRODUCTOS
 
         </button>
-
 
     </div>
 
 
-    <!-- =========================
-         BUSCADOR
-    ========================= -->
+    <!-- =====================================================
+         SEPARADOR
+    ===================================================== -->
+
+    <div class="separador">
+
+        🕸️
+        ESPECIAL HALLOWEEN
+        🕸️
+
+    </div>
 
 
-
-    <!-- =========================
+    <!-- =====================================================
          GALERÍA
-    ========================= -->
+    ===================================================== -->
 
     <div
         class="galeria"
         id="galeria">
+
     </div>
 
 
-    <!-- =========================
+    <!-- =====================================================
          VISOR
-    ========================= -->
+    ===================================================== -->
 
     <div
         class="visor"
@@ -480,6 +1158,7 @@
 
         </span>
 
+
         <button
             class="anterior"
             onclick="imagenAnterior()"
@@ -489,10 +1168,12 @@
 
         </button>
 
+
         <img
             id="imagenGrande"
             src=""
             alt="Producto">
+
 
         <button
             class="siguiente"
@@ -502,6 +1183,7 @@
             &#10095;
 
         </button>
+
 
         <div
             class="numero"
@@ -514,62 +1196,105 @@
     </div>
 
 
+    <!-- =====================================================
+         WHATSAPP
+         Cambiá el número si querés utilizar otro.
+    ===================================================== -->
+
+    <a
+        class="whatsapp"
+        href="https://wa.me/543425953332"
+        target="_blank"
+        aria-label="Contactar por WhatsApp">
+
+        💬
+
+    </a>
+
+
+    <!-- =====================================================
+         PIE
+    ===================================================== -->
+
+    <footer>
+
+        <span class="calabaza">
+            🎃 👻 🕷️
+        </span>
+
+        <strong>
+            MAM DISTRIBUCIONES
+        </strong>
+
+        <br>
+
+        Catálogo especial Halloween
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
+
     <script>
 
-        /* =========================
+        /* =====================================================
            CONFIGURACIÓN
-        ========================= */
+        ===================================================== */
 
         const TOTAL_IMAGENES = 60;
 
 
-
-        /* =========================
+        /* =====================================================
            ELEMENTOS
-        ========================= */
+        ===================================================== */
 
         const galeria =
             document.getElementById(
                 "galeria"
             );
 
+
         const visor =
             document.getElementById(
                 "visor"
             );
+
 
         const imagenGrande =
             document.getElementById(
                 "imagenGrande"
             );
 
+
         const numeroImagen =
             document.getElementById(
                 "numeroImagen"
             );
 
-        const buscador =
-            document.getElementById(
-                "buscar"
-            );
-const btnTodos =
+
+        const btnTodos =
             document.getElementById(
                 "btnTodos"
             );
-/* =========================
+
+
+        /* =====================================================
            VARIABLES
-        ========================= */
+        ===================================================== */
 
         let imagenActual = 1;
 
 
-        /* =========================
+        /* =====================================================
            CREAR GALERÍA
-        ========================= */
+        ===================================================== */
 
         function mostrarImagenes() {
 
             galeria.innerHTML = "";
+
 
             for (
                 let i = 1;
@@ -582,11 +1307,14 @@ const btnTodos =
                         "div"
                     );
 
+
                 producto.className =
                     "producto";
 
+
                 producto.dataset.numero =
                     i;
+
 
                 producto.innerHTML = `
 
@@ -596,32 +1324,39 @@ const btnTodos =
                         loading="lazy"
                     >
 
+                    <div class="producto-info">
+
+                        🎃 Producto ${i}
+
+                    </div>
+
                 `;
 
 
-                /* =========================
+                /* =================================================
                    ABRIR VISOR
-                ========================= */
+                ================================================= */
 
                 producto.onclick =
-                    function() {
+                    function () {
 
                         abrirVisor(i);
 
                     };
 
 
-                /* =========================
+                /* =================================================
                    IMAGEN NO EXISTE
-                ========================= */
+                ================================================= */
 
                 const imagen =
                     producto.querySelector(
                         "img"
                     );
 
+
                 imagen.onerror =
-                    function() {
+                    function () {
 
                         producto.style.display =
                             "none";
@@ -638,130 +1373,37 @@ const btnTodos =
         }
 
 
-        /* =========================
+        /* =====================================================
            MOSTRAR TODOS
-        ========================= */
+        ===================================================== */
 
         function mostrarTodos() {
 
-            buscador.value = "";
-
-            btnTodos.classList.add("activa");
+            btnTodos.classList.add(
+                "activa"
+            );
 
             mostrarImagenes();
 
         }
 
-/* =========================
-           BUSCADOR
-        ========================= */
 
-        function buscar() {
-
-            const texto =
-                buscador.value
-                    .toLowerCase()
-                    .trim();
-
-            const productos =
-                document.querySelectorAll(
-                    ".producto"
-                );
-
-            let encontrados = 0;
-
-
-            productos.forEach(
-                producto => {
-
-                    const numero =
-                        producto.dataset.numero;
-
-                    /* Buscar por número */
-
-                    if (
-                        numero.includes(texto)
-                    ) {
-
-                        producto.style.display =
-                            "block";
-
-                        encontrados++;
-
-                    } else {
-
-                        producto.style.display =
-                            "none";
-
-                    }
-
-                }
-            );
-
-
-            /* =========================
-               MENSAJE SIN RESULTADOS
-            ========================= */
-
-            let mensaje =
-                document.getElementById(
-                    "sinResultados"
-                );
-
-
-            if (
-                texto !== "" &&
-                encontrados === 0
-            ) {
-
-                if (!mensaje) {
-
-                    mensaje =
-                        document.createElement(
-                            "div"
-                        );
-
-                    mensaje.id =
-                        "sinResultados";
-
-                    mensaje.className =
-                        "sin-resultados";
-
-                    mensaje.textContent =
-                        "No se encontró ningún producto.";
-
-                    galeria.appendChild(
-                        mensaje
-                    );
-
-                }
-
-            } else {
-
-                if (mensaje) {
-
-                    mensaje.remove();
-
-                }
-
-            }
-
-        }
-
-
-        /* =========================
+        /* =====================================================
            ABRIR VISOR
-        ========================= */
+        ===================================================== */
 
         function abrirVisor(numero) {
 
             imagenActual =
                 numero;
 
+
             actualizarVisor();
+
 
             visor.style.display =
                 "flex";
+
 
             document.body.style.overflow =
                 "hidden";
@@ -769,9 +1411,9 @@ const btnTodos =
         }
 
 
-        /* =========================
+        /* =====================================================
            ACTUALIZAR VISOR
-        ========================= */
+        ===================================================== */
 
         function actualizarVisor() {
 
@@ -779,9 +1421,11 @@ const btnTodos =
                 imagenActual +
                 ".png";
 
+
             imagenGrande.alt =
                 "Producto " +
                 imagenActual;
+
 
             numeroImagen.textContent =
                 imagenActual +
@@ -791,14 +1435,15 @@ const btnTodos =
         }
 
 
-        /* =========================
+        /* =====================================================
            CERRAR VISOR
-        ========================= */
+        ===================================================== */
 
         function cerrarVisor() {
 
             visor.style.display =
                 "none";
+
 
             document.body.style.overflow =
                 "auto";
@@ -806,13 +1451,14 @@ const btnTodos =
         }
 
 
-        /* =========================
+        /* =====================================================
            IMAGEN ANTERIOR
-        ========================= */
+        ===================================================== */
 
         function imagenAnterior() {
 
             imagenActual--;
+
 
             if (
                 imagenActual < 1
@@ -823,18 +1469,20 @@ const btnTodos =
 
             }
 
+
             actualizarVisor();
 
         }
 
 
-        /* =========================
+        /* =====================================================
            IMAGEN SIGUIENTE
-        ========================= */
+        ===================================================== */
 
         function imagenSiguiente() {
 
             imagenActual++;
+
 
             if (
                 imagenActual >
@@ -846,18 +1494,19 @@ const btnTodos =
 
             }
 
+
             actualizarVisor();
 
         }
 
 
-        /* =========================
+        /* =====================================================
            CERRAR AL HACER CLICK AFUERA
-        ========================= */
+        ===================================================== */
 
         visor.addEventListener(
             "click",
-            function(event) {
+            function (event) {
 
                 if (
                     event.target === visor
@@ -871,13 +1520,14 @@ const btnTodos =
         );
 
 
-        /* =========================
+        /* =====================================================
            TECLADO
-        ========================= */
+        ===================================================== */
 
         document.addEventListener(
             "keydown",
-            function(event) {
+            function (event) {
+
 
                 /* ESC */
 
@@ -918,13 +1568,14 @@ const btnTodos =
         );
 
 
-        /* =========================
+        /* =====================================================
            CARGAR GALERÍA
-        ========================= */
+        ===================================================== */
 
         mostrarImagenes();
 
     </script>
+
 
 </body>
 
