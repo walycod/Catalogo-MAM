@@ -1,932 +1,419 @@
+
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Catálogo de productos</title>
-
-    <style>
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #f3f3f3;
-            color: #222;
-        }
-
-        /* =========================
-           ENCABEZADO
-        ========================= */
-
-        header {
-            background: #d71920;
-            color: white;
-            text-align: center;
-            padding: 25px 15px;
-        }
-
-        header h1 {
-            font-size: 32px;
-            margin-bottom: 8px;
-        }
-
-        header p {
-            font-size: 16px;
-        }
-
-        /* =========================
-           PESTAÑAS
-        ========================= */
-
-        .pestanas {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            padding: 20px 15px 10px;
-            flex-wrap: wrap;
-        }
-
-        .pestana {
-            border: none;
-            padding: 13px 25px;
-            border-radius: 30px;
-            background: white;
-            color: #333;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-
-            box-shadow:
-                0 3px 10px rgba(0, 0, 0, 0.12);
-
-            transition: 0.25s;
-        }
-
-        .pestana:hover {
-            transform: translateY(-2px);
-        }
-
-        .pestana.activa {
-            background: #d71920;
-            color: white;
-        }
-
-
-
-        /* =========================
-           BUSCADOR
-        ========================= */
-
-        .buscador {
-            max-width: 500px;
-            margin: 15px auto 25px;
-            padding: 0 15px;
-        }
-
-        .buscador input {
-            width: 100%;
-            padding: 14px 18px;
-
-            border: 1px solid #ddd;
-            border-radius: 30px;
-
-            font-size: 16px;
-            outline: none;
-        }
-
-        .buscador input:focus {
-            border-color: #d71920;
-        }
-
-
-
-        /* =========================
-           GALERÍA
-        ========================= */
-
-        .galeria {
-            max-width: 1200px;
-
-            margin: 0 auto;
-
-            padding:
-                10px
-                15px
-                50px;
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(4, 1fr);
-
-            gap: 20px;
-        }
-
-        /* =========================
-           PRODUCTO
-        ========================= */
-
-        .producto {
-            position: relative;
-
-            background: white;
-
-            border-radius: 12px;
-
-            overflow: hidden;
-
-            cursor: pointer;
-
-            box-shadow:
-                0 3px 10px
-                rgba(0, 0, 0, 0.10);
-
-            transition:
-                transform 0.25s,
-                box-shadow 0.25s;
-        }
-
-        .producto:hover {
-            transform:
-                translateY(-5px);
-
-            box-shadow:
-                0 8px 20px
-                rgba(0, 0, 0, 0.18);
-        }
-
-        .producto img {
-            width: 100%;
-
-            height: 230px;
-
-            display: block;
-
-            object-fit: contain;
-
-            padding: 10px;
-
-            background: white;
-        }
-
-
-
-        /* =========================
-           VISOR GRANDE
-        ========================= */
-
-        .visor {
-            display: none;
-
-            position: fixed;
-
-            z-index: 9999;
-
-            left: 0;
-            top: 0;
-
-            width: 100%;
-            height: 100%;
-
-            background:
-                rgba(0, 0, 0, 0.92);
-
-            align-items: center;
-            justify-content: center;
-        }
-
-        .visor img {
-            max-width: 90%;
-            max-height: 90%;
-
-            object-fit: contain;
-
-            border-radius: 8px;
-
-            box-shadow:
-                0 0 30px
-                rgba(0, 0, 0, 0.5);
-        }
-
-        /* =========================
-           CERRAR
-        ========================= */
-
-        .cerrar {
-            position: absolute;
-
-            top: 20px;
-            right: 30px;
-
-            color: white;
-
-            font-size: 45px;
-
-            font-weight: bold;
-
-            cursor: pointer;
-
-            z-index: 10001;
-        }
-
-        .cerrar:hover {
-            color: #ff4444;
-        }
-
-        /* =========================
-           ANTERIOR / SIGUIENTE
-        ========================= */
-
-        .anterior,
-        .siguiente {
-            position: absolute;
-
-            top: 50%;
-
-            transform:
-                translateY(-50%);
-
-            border: none;
-
-            background:
-                rgba(255, 255, 255, 0.2);
-
-            color: white;
-
-            width: 55px;
-            height: 70px;
-
-            font-size: 35px;
-
-            cursor: pointer;
-
-            border-radius: 8px;
-
-            transition:
-                background 0.2s;
-        }
-
-        .anterior:hover,
-        .siguiente:hover {
-            background:
-                rgba(255, 255, 255, 0.4);
-        }
-
-        .anterior {
-            left: 20px;
-        }
-
-        .siguiente {
-            right: 20px;
-        }
-
-        /* =========================
-           NUMERO
-        ========================= */
-
-        .numero {
-            position: absolute;
-
-            bottom: 20px;
-
-            left: 50%;
-
-            transform:
-                translateX(-50%);
-
-            color: white;
-
-            background:
-                rgba(0, 0, 0, 0.5);
-
-            padding: 8px 15px;
-
-            border-radius: 20px;
-
-            font-size: 15px;
-        }
-
-        /* =========================
-           SIN RESULTADOS
-        ========================= */
-
-        .sin-resultados {
-            grid-column: 1 / -1;
-
-            text-align: center;
-
-            padding: 50px;
-
-            color: #777;
-
-            font-size: 18px;
-        }
-
-        /* =========================
-           RESPONSIVE
-        ========================= */
-
-        @media (max-width: 900px) {
-
-            .galeria {
-                grid-template-columns:
-                    repeat(3, 1fr);
-            }
-
-        }
-
-        @media (max-width: 650px) {
-
-            header h1 {
-                font-size: 26px;
-            }
-
-            .pestana {
-                padding: 11px 17px;
-                font-size: 14px;
-            }
-
-            .galeria {
-                grid-template-columns:
-                    repeat(2, 1fr);
-
-                gap: 12px;
-            }
-
-            .producto img {
-                height: 180px;
-            }
-
-            .nombre-producto {
-                font-size: 17px;
-            }
-
-            .promocion {
-                font-size: 13px;
-            }
-
-            .anterior,
-            .siguiente {
-                width: 45px;
-                height: 60px;
-                font-size: 28px;
-            }
-
-            .anterior {
-                left: 8px;
-            }
-
-            .siguiente {
-                right: 8px;
-            }
-
-        }
-
-        @media (max-width: 400px) {
-
-            .producto img {
-                height: 150px;
-            }
-
-            .pestanas {
-                gap: 7px;
-            }
-
-            .pestana {
-                padding: 10px 12px;
-                font-size: 13px;
-            }
-
-        }
-
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catálogo de productos</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f3f3f3;
+    color: #222;
+}
+
+header {
+    background: #d71920;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+}
+
+header h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.pestanas {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 20px 15px;
+    flex-wrap: wrap;
+}
+
+.pestana {
+    border: none;
+    padding: 13px 25px;
+    border-radius: 30px;
+    background: white;
+    color: #333;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 3px 10px #0002;
+}
+
+.pestana.activa {
+    background: #d71920;
+    color: white;
+}
+
+.pestana.oferta {
+    background: #222;
+    color: white;
+}
+
+.pestana.oferta.activa {
+    background: #ff9d00;
+    color: #222;
+}
+
+.galeria {
+    max-width: 1200px;
+    margin: auto;
+    padding: 10px 15px 50px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.producto {
+    position: relative;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 3px 10px #0002;
+    transition: .25s;
+}
+
+.producto:hover {
+    transform: translateY(-5px);
+}
+
+.producto img {
+    width: 100%;
+    height: 230px;
+    object-fit: contain;
+    padding: 10px;
+}
+
+.nombre-producto {
+    text-align: center;
+    padding: 12px;
+    font-weight: bold;
+}
+
+.etiqueta {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #d71920;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    z-index: 2;
+}
+
+.etiqueta.verde {
+    background: #168b43;
+}
+
+.sin-resultados {
+    grid-column: 1/-1;
+    text-align: center;
+    padding: 50px;
+    color: #777;
+}
+
+.visor {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    background: #000e;
+    align-items: center;
+    justify-content: center;
+}
+
+.visor img {
+    max-width: 85%;
+    max-height: 85%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.cerrar {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 45px;
+    cursor: pointer;
+}
+
+.anterior, .siguiente {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: #ffffff33;
+    color: white;
+    width: 55px;
+    height: 70px;
+    font-size: 35px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.anterior { left: 20px; }
+.siguiente { right: 20px; }
+
+.numero {
+    position: absolute;
+    bottom: 20px;
+    color: white;
+    background: #0008;
+    padding: 8px 15px;
+    border-radius: 20px;
+}
+
+@media(max-width:900px) {
+    .galeria { grid-template-columns: repeat(3,1fr); }
+}
+
+@media(max-width:650px) {
+    header h1 { font-size: 26px; }
+
+    .galeria {
+        grid-template-columns: repeat(2,1fr);
+        gap: 12px;
+    }
+
+    .producto img { height: 180px; }
+
+    .anterior, .siguiente {
+        width: 45px;
+        height: 60px;
+        font-size: 28px;
+    }
+
+    .anterior { left: 8px; }
+    .siguiente { right: 8px; }
+}
+
+@media(max-width:400px) {
+    .producto img { height: 150px; }
+    .pestana { padding: 10px 12px; font-size: 13px; }
+}
+</style>
 </head>
 
 <body>
 
-    <!-- =========================
-         ENCABEZADO
-    ========================= -->
+<header>
+    <h1>CATÁLOGO</h1>
+    <p>Todos nuestros productos</p>
+</header>
 
-    <header>
+<div class="pestanas">
 
-        <h1>
-            CATÁLOGO
-        </h1>
+    <button class="pestana activa" id="btnTodos"
+    onclick="mostrarTodos()">
+        🛍️ TODOS
+    </button>
 
-        <p>
-            Todos nuestros productos
-        </p>
+    <button class="pestana oferta" id="btnOferta"
+    onclick="mostrarOfertas()">
+        🔥 OFERTA DEL DÍA
+    </button>
 
-    </header>
+</div>
 
+<div class="galeria" id="galeria"></div>
 
-    <!-- =========================
-         PESTAÑAS
-    ========================= -->
+<div class="visor" id="visor">
 
-    <div class="pestanas">
+    <span class="cerrar" onclick="cerrarVisor()">
+        &times;
+    </span>
 
-        <button
-            class="pestana activa"
-            id="btnTodos"
-            onclick="mostrarTodos()">
+    <button class="anterior" onclick="cambiar(-1)">
+        &#10094;
+    </button>
 
-            🛍️ TODOS
+    <img id="imagenGrande" src="" alt="Producto">
 
-        </button>
+    <button class="siguiente" onclick="cambiar(1)">
+        &#10095;
+    </button>
 
+    <div class="numero" id="numeroImagen"></div>
 
-    </div>
+</div>
 
+<script>
 
-    <!-- =========================
-         BUSCADOR
-    ========================= -->
+const TOTAL_IMAGENES = 65;
 
+const ofertas = [
+    {
+        numero: 62,
+        imagen: "62.png",
+        nombre: "ALF RASTA BLANCO",
+        descuento: "10% OFF"
+    },
+    {
+        numero: 66,
+        imagen: "66.png",
+        nombre: "TIC TAC MENTA FUERTE",
+        descuento: "OFERTA DEL DÍA"
+    }
+];
 
+const galeria = document.getElementById("galeria");
+const visor = document.getElementById("visor");
+const imagenGrande = document.getElementById("imagenGrande");
+const numeroImagen = document.getElementById("numeroImagen");
 
-    <!-- =========================
-         GALERÍA
-    ========================= -->
+let productosVisibles = [];
+let imagenActual = 0;
 
-    <div
-        class="galeria"
-        id="galeria">
-    </div>
+function mostrarTodos() {
 
+    activarBoton("btnTodos");
 
-    <!-- =========================
-         VISOR
-    ========================= -->
+    galeria.innerHTML = "";
+    productosVisibles = [];
 
-    <div
-        class="visor"
-        id="visor">
+    for(let i = 1; i <= TOTAL_IMAGENES; i++) {
 
-        <span
-            class="cerrar"
-            onclick="cerrarVisor()"
-            aria-label="Cerrar">
+        agregarProducto({
+            imagen: i + ".png",
+            nombre: "Producto " + i,
+            numero: i
+        });
+    }
+}
 
-            &times;
+function mostrarOfertas() {
 
-        </span>
+    activarBoton("btnOferta");
 
-        <button
-            class="anterior"
-            onclick="imagenAnterior()"
-            aria-label="Imagen anterior">
+    galeria.innerHTML = "";
+    productosVisibles = [];
 
-            &#10094;
+    ofertas.forEach(producto => {
+        agregarProducto(producto);
+    });
+}
 
-        </button>
+function activarBoton(id) {
 
-        <img
-            id="imagenGrande"
-            src=""
-            alt="Producto">
+    document.querySelectorAll(".pestana")
+        .forEach(b => b.classList.remove("activa"));
 
-        <button
-            class="siguiente"
-            onclick="imagenSiguiente()"
-            aria-label="Imagen siguiente">
+    document.getElementById(id)
+        .classList.add("activa");
+}
 
-            &#10095;
+function agregarProducto(datos) {
 
-        </button>
+    const producto = document.createElement("div");
+    producto.className = "producto";
 
-        <div
-            class="numero"
-            id="numeroImagen">
+    const img = document.createElement("img");
+    img.src = datos.imagen;
+    img.alt = datos.nombre;
+    img.loading = "lazy";
 
-            1 / 65
-            
+    const nombre = document.createElement("div");
+    nombre.className = "nombre-producto";
+    nombre.textContent = datos.nombre;
 
-        </div>
+    if(datos.descuento) {
 
-    </div>
+        const etiqueta = document.createElement("div");
+        etiqueta.className = "etiqueta";
+        etiqueta.textContent = datos.descuento;
 
-
-    <script>
-
-        /* =========================
-           CONFIGURACIÓN
-        ========================= */
-
-        const TOTAL_IMAGENES = 65;
-
-
-
-        /* =========================
-           ELEMENTOS
-        ========================= */
-
-        const galeria =
-            document.getElementById(
-                "galeria"
-            );
-
-        const visor =
-            document.getElementById(
-                "visor"
-            );
-
-        const imagenGrande =
-            document.getElementById(
-                "imagenGrande"
-            );
-
-        const numeroImagen =
-            document.getElementById(
-                "numeroImagen"
-            );
-
-        const buscador =
-            document.getElementById(
-                "buscar"
-            );
-const btnTodos =
-            document.getElementById(
-                "btnTodos"
-            );
-/* =========================
-           VARIABLES
-        ========================= */
-
-        let imagenActual = 1;
-
-
-        /* =========================
-           CREAR GALERÍA
-        ========================= */
-
-        function mostrarImagenes() {
-
-            galeria.innerHTML = "";
-
-            for (
-                let i = 1;
-                i <= TOTAL_IMAGENES;
-                i++
-            ) {
-
-                const producto =
-                    document.createElement(
-                        "div"
-                    );
-
-                producto.className =
-                    "producto";
-
-                producto.dataset.numero =
-                    i;
-
-                producto.innerHTML = `
-
-                    <img
-                        src="${i}.png"
-                        alt="Producto ${i}"
-                        loading="lazy"
-                    >
-
-                `;
-
-
-                /* =========================
-                   ABRIR VISOR
-                ========================= */
-
-                producto.onclick =
-                    function() {
-
-                        abrirVisor(i);
-
-                    };
-
-
-                /* =========================
-                   IMAGEN NO EXISTE
-                ========================= */
-
-                const imagen =
-                    producto.querySelector(
-                        "img"
-                    );
-
-                imagen.onerror =
-                    function() {
-
-                        producto.style.display =
-                            "none";
-
-                    };
-
-
-                galeria.appendChild(
-                    producto
-                );
-
-            }
-
+        if(datos.descuento === "OFERTA DEL DÍA") {
+            etiqueta.classList.add("verde");
         }
 
+        producto.appendChild(etiqueta);
+    }
 
-        /* =========================
-           MOSTRAR TODOS
-        ========================= */
+    img.onerror = () => {
+        producto.remove();
+    };
 
-        function mostrarTodos() {
+    producto.appendChild(img);
+    producto.appendChild(nombre);
 
-            buscador.value = "";
+    producto.onclick = () => abrirVisor(datos.imagen);
 
-            btnTodos.classList.add("activa");
+    galeria.appendChild(producto);
 
-            mostrarImagenes();
+    productosVisibles.push(datos.imagen);
+}
 
-        }
+function abrirVisor(imagen) {
 
-/* =========================
-           BUSCADOR
-        ========================= */
+    imagenActual = productosVisibles.indexOf(imagen);
 
-        function buscar() {
+    actualizarVisor();
 
-            const texto =
-                buscador.value
-                    .toLowerCase()
-                    .trim();
+    visor.style.display = "flex";
+    document.body.style.overflow = "hidden";
+}
 
-            const productos =
-                document.querySelectorAll(
-                    ".producto"
-                );
+function actualizarVisor() {
 
-            let encontrados = 0;
+    imagenGrande.src = productosVisibles[imagenActual];
 
+    numeroImagen.textContent =
+        (imagenActual + 1) + " / " + productosVisibles.length;
+}
 
-            productos.forEach(
-                producto => {
+function cerrarVisor() {
 
-                    const numero =
-                        producto.dataset.numero;
+    visor.style.display = "none";
+    document.body.style.overflow = "auto";
+}
 
-                    /* Buscar por número */
+function cambiar(direccion) {
 
-                    if (
-                        numero.includes(texto)
-                    ) {
+    imagenActual += direccion;
 
-                        producto.style.display =
-                            "block";
+    if(imagenActual < 0) {
+        imagenActual = productosVisibles.length - 1;
+    }
 
-                        encontrados++;
+    if(imagenActual >= productosVisibles.length) {
+        imagenActual = 0;
+    }
 
-                    } else {
+    actualizarVisor();
+}
 
-                        producto.style.display =
-                            "none";
+visor.addEventListener("click", e => {
+    if(e.target === visor) cerrarVisor();
+});
 
-                    }
+document.addEventListener("keydown", e => {
 
-                }
-            );
+    if(visor.style.display !== "flex") return;
 
+    if(e.key === "Escape") cerrarVisor();
+    if(e.key === "ArrowLeft") cambiar(-1);
+    if(e.key === "ArrowRight") cambiar(1);
 
-            /* =========================
-               MENSAJE SIN RESULTADOS
-            ========================= */
+});
 
-            let mensaje =
-                document.getElementById(
-                    "sinResultados"
-                );
+mostrarTodos();
 
-
-            if (
-                texto !== "" &&
-                encontrados === 0
-            ) {
-
-                if (!mensaje) {
-
-                    mensaje =
-                        document.createElement(
-                            "div"
-                        );
-
-                    mensaje.id =
-                        "sinResultados";
-
-                    mensaje.className =
-                        "sin-resultados";
-
-                    mensaje.textContent =
-                        "No se encontró ningún producto.";
-
-                    galeria.appendChild(
-                        mensaje
-                    );
-
-                }
-
-            } else {
-
-                if (mensaje) {
-
-                    mensaje.remove();
-
-                }
-
-            }
-
-        }
-
-
-        /* =========================
-           ABRIR VISOR
-        ========================= */
-
-        function abrirVisor(numero) {
-
-            imagenActual =
-                numero;
-
-            actualizarVisor();
-
-            visor.style.display =
-                "flex";
-
-            document.body.style.overflow =
-                "hidden";
-
-        }
-
-
-        /* =========================
-           ACTUALIZAR VISOR
-        ========================= */
-
-        function actualizarVisor() {
-
-            imagenGrande.src =
-                imagenActual +
-                ".png";
-
-            imagenGrande.alt =
-                "Producto " +
-                imagenActual;
-
-            numeroImagen.textContent =
-                imagenActual +
-                " / " +
-                TOTAL_IMAGENES;
-
-        }
-
-
-        /* =========================
-           CERRAR VISOR
-        ========================= */
-
-        function cerrarVisor() {
-
-            visor.style.display =
-                "none";
-
-            document.body.style.overflow =
-                "auto";
-
-        }
-
-
-        /* =========================
-           IMAGEN ANTERIOR
-        ========================= */
-
-        function imagenAnterior() {
-
-            imagenActual--;
-
-            if (
-                imagenActual < 1
-            ) {
-
-                imagenActual =
-                    TOTAL_IMAGENES;
-
-            }
-
-            actualizarVisor();
-
-        }
-
-
-        /* =========================
-           IMAGEN SIGUIENTE
-        ========================= */
-
-        function imagenSiguiente() {
-
-            imagenActual++;
-
-            if (
-                imagenActual >
-                TOTAL_IMAGENES
-            ) {
-
-                imagenActual =
-                    1;
-
-            }
-
-            actualizarVisor();
-
-        }
-
-
-        /* =========================
-           CERRAR AL HACER CLICK AFUERA
-        ========================= */
-
-        visor.addEventListener(
-            "click",
-            function(event) {
-
-                if (
-                    event.target === visor
-                ) {
-
-                    cerrarVisor();
-
-                }
-
-            }
-        );
-
-
-        /* =========================
-           TECLADO
-        ========================= */
-
-        document.addEventListener(
-            "keydown",
-            function(event) {
-
-                /* ESC */
-
-                if (
-                    event.key === "Escape" &&
-                    visor.style.display === "flex"
-                ) {
-
-                    cerrarVisor();
-
-                }
-
-
-                /* IZQUIERDA */
-
-                if (
-                    event.key === "ArrowLeft" &&
-                    visor.style.display === "flex"
-                ) {
-
-                    imagenAnterior();
-
-                }
-
-
-                /* DERECHA */
-
-                if (
-                    event.key === "ArrowRight" &&
-                    visor.style.display === "flex"
-                ) {
-
-                    imagenSiguiente();
-
-                }
-
-            }
-        );
-
-
-        /* =========================
-           CARGAR GALERÍA
-        ========================= */
-
-        mostrarImagenes();
-
-    </script>
+</script>
 
 </body>
-
 </html>
