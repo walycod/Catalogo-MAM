@@ -226,6 +226,29 @@ header h1 {
     background: #128C7E;
     transform: scale(1.05);
 }
+    .encabezado-mam {
+    width: 100%;
+    padding: 0;
+    background: #d71920;
+    overflow: hidden;
+}
+
+.encabezado-mam img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 430px;
+    object-fit: cover;
+    object-position: center;
+}
+
+@media(max-width: 650px) {
+    .encabezado-mam img {
+        min-height: 180px;
+        object-fit: cover;
+    }
+}
+
 </style>
 </head>
 
@@ -235,10 +258,10 @@ href="https://wa.me/5493425953322?text=Hola%20MAM,%20quisiera%20consultar%20por%
 target="_blank">
 💬 Consultar por WhatsApp
 </a>
-<header>
-    <h1>CATÁLOGO</h1>
-    <p>Todos nuestros productos</p>
+   <header class="encabezado-mam">
+    <img src="encabezado-mam.png" alt="MAM Miguel Angel Montú Distribuciones">
 </header>
+
 
 <div class="pestanas">
 
