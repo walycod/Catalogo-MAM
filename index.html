@@ -206,11 +206,35 @@ header h1 {
     .producto img { height: 150px; }
     .pestana { padding: 10px 12px; font-size: 13px; }
 }
+    .boton-whatsapp {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: #25D366;
+    color: white;
+    padding: 15px 22px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px #0003;
+    z-index: 99999;
+    transition: .3s;
+}
+
+.boton-whatsapp:hover {
+    background: #128C7E;
+    transform: scale(1.05);
+}
 </style>
 </head>
 
 <body>
-
+<a class="boton-whatsapp"
+href="https://wa.me/5493425953322?text=Hola%20MAM,%20quisiera%20consultar%20por%20sus%20productos."
+target="_blank">
+💬 Consultar por WhatsApp
+</a>
 <header>
     <h1>CATÁLOGO</h1>
     <p>Todos nuestros productos</p>
